@@ -1,6 +1,7 @@
-extern void print(const char *s);
+extern void print(const char* s);
 
-int main() {
-    print("salut\n");
+int main(void)
+{
+    print("Ahmet");
     return 0;
 }
