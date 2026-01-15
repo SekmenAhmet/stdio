@@ -1,11 +1,11 @@
 .global _start
 
-.extern print
+.extern main
 
 .section .text
 
 _start:
-	bl print
+	bl main
 	
 	mov r0, #0
 	mov r7, #1
