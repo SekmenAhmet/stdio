@@ -13,8 +13,8 @@ LDFLAGS = -no-pie
 # Editeur de liens pour l'asm pure
 LD = ld
 
-# Objets asm communs
-ASM_LIB = out.o in.o
+# Objet asm commun
+ASM_LIB = out.o
 
 # C par defaut
 all: c
@@ -27,13 +27,17 @@ c: main.o $(ASM_LIB)
 asm: start.o $(ASM_LIB)
 	$(LD) start.o $(ASM_LIB) -o $(NAME)
 
-# Compilation generique des sources asm
-%.o: %.s
-	$(ASM) $(ASMFLAGS) $< -o $@
+# Compilation des sources asm
+out.o: out.s
+	$(ASM) $(ASMFLAGS) out.s -o out.o
 
-# Compilation generique des sources C
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Compilation du point d'entree asm
+start.o: start.s
+	$(ASM) $(ASMFLAGS) start.s -o start.o
+
+# Compilation du fichier C
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c -o main.o
 
 # Nettoyage des objets et du binaire
 clean:
